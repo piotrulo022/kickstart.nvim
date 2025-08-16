@@ -72,7 +72,7 @@ Kickstart Guide:
 
    NOTE: Look for lines like this
 
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
+    Throughout the file. These are for you, the reader,to help you understand what is happening.
     Feel free to delete them once you know what you're doing, but they should serve as a guide
     for when you are first encountering a few different constructs in your Neovim config.
 
@@ -688,7 +688,6 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -949,7 +948,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -990,7 +989,6 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' },
-  --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
@@ -1038,19 +1036,30 @@ vim.wo.showbreak = '↪ '
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-vim.keymap.set('n', 'Down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('n', 'Up', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', '<down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('n', '<up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Visual mode mappings
 vim.keymap.set('v', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set('v', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-vim.keymap.set('v', 'Down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('v', 'Up', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('v', '<down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('v', '<up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Operator-pending mode mappings
 vim.keymap.set('o', 'j', "v:count == 0 ? 'gj' : <LeftMouse>'j'", { expr = true, silent = true })
 vim.keymap.set('o', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-vim.keymap.set('o', 'Down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set('o', 'Up', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('o', 'down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('o', 'up', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Prevent deleting from also copying
+vim.keymap.set({ 'n', 'v' }, 'd', '"_d', { noremap = true })
+vim.keymap.set('n', 'dd', '"_dd', { noremap = true }) -- buffers
+
+-- buffers
+vim.keymap.set('n', '<leader><right>', ':bn<cr>')
+vim.keymap.set('n', '<leader><left>', ':bp<cr>')
+
+-- yank to clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
