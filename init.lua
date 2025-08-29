@@ -679,7 +679,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        basedpyright = {},
+        -- basedpyright = {},
         ruff = {},
 
         -- rust_analyzer = {},
@@ -780,7 +780,8 @@ require('lazy').setup({
         python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'deno_fmt' },
       },
     },
   },
